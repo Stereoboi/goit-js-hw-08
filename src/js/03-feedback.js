@@ -3,10 +3,10 @@ const formRef = document.querySelector('form');
 const STORAGE_KEY = 'feedback-form-state';
 populateTextInput()
 
-formRef.addEventListener('submit', getChangedFormValue);
+formRef.addEventListener('submit', getFormInputData);
 formRef.addEventListener('input', throttle(enteredValues, 500));
 
-function getChangedFormValue(event) {
+function getFormInputData(event) {
     event.preventDefault();
 
     const { elements } = event.target;
@@ -34,7 +34,6 @@ function enteredValues() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(values));
     
 }
-
 
 function populateTextInput() {
     const savedData = JSON.parse(localStorage.getItem(STORAGE_KEY));
