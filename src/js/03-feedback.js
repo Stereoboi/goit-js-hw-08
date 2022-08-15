@@ -9,28 +9,34 @@ formRef.addEventListener('input', throttle(enteredValues, 500));
 function getFormInputData(event) {
     event.preventDefault();
 
-    const { elements } = event.target;
+    const {elements} = event.target;
     const values = {};
 
-    for (let i = 0; i < elements.length; i += 1){
+    for (let i = 0; i < elements.length; i += 1) {
 
         const formElement = elements[i];
         const {name} = formElement;
         
         if (name) {
-        const { value } = formElement;
-        values[name] = value;
+            const {value} = formElement;
+            values[name] = value;
         }
     }
-    console.log('Submited', values);
-    localStorage.removeItem(STORAGE_KEY);
-    event.currentTarget.reset()
+    if (values.email === '' || values.message === '' ) {
+        alert('Please check the entered data');
+        return;
+    }
+        console.log('Submited', values);
+        localStorage.removeItem(STORAGE_KEY);
+        event.currentTarget.reset()
+        
 }
 
 function enteredValues() {
 
     const formData = new FormData(formRef);
     const values = Object.fromEntries(formData.entries());
+    // console.log(values);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(values));
     
 }

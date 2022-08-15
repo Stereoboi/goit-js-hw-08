@@ -15,5 +15,6 @@ function pausedTime(evt) {
 }
 
 const time = JSON.parse(localStorage.getItem('videoplayer-current-time'));
-
-player.setCurrentTime(time);
+if (time) {
+  player.setCurrentTime(time);
+}
